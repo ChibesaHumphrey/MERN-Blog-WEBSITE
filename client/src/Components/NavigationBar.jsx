@@ -39,11 +39,11 @@ export default function NavigationBar() {
           </Button>
           <Button
             gradientDuoTone="purpleToPink"
-            onClick={() => navigate("sign-in")}
+            onClick={() => navigate("sign-up")}
             pill
             size={"xs"}
           >
-            Sign In
+            Sign Up
           </Button>
         </div>
         <Navbar.Toggle />

@@ -6,7 +6,6 @@ const AuthRouter = require("./Routes/Auth.Router.js");
 const Error = require("./Middlewares/Error.Middleware.js");
 const PORT = process.env.PORT || 5000;
 const app = express();
-commit;
 
 //Application Level Middleware
 app.use(express.json());
