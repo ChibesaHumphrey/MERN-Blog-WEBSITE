@@ -1,8 +1,10 @@
 "use client";
 
-import { Button, Navbar } from "flowbite-react";
+import { Navbar } from "flowbite-react";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 export default function NavigationBar() {
+  const path = useLocation().pathname;
   return (
     <div className="pt-4">
       <Navbar fluid rounded>
@@ -19,15 +21,27 @@ export default function NavigationBar() {
 
         <Navbar.Toggle />
         <Navbar.Collapse>
-          <Navbar.Link href="#" active>
-            Home
+          <Navbar.Link active={path == "/"} as={"div"}>
+            <Link to={"/"}>Home</Link>
           </Navbar.Link>
-          <Navbar.Link href="#">About</Navbar.Link>
-          <Navbar.Link href="#">Services</Navbar.Link>
-          <Navbar.Link href="#">Pricing</Navbar.Link>
-          <Navbar.Link href="#">Contact</Navbar.Link>
+          <Navbar.Link active={path == "/"} as={"div"}>
+            <Link to={"about"}>About</Link>
+          </Navbar.Link>
+          <Navbar.Link active={path == "/"} as={"div"}>
+            <Link to={"projects"}>Projects</Link>
+          </Navbar.Link>
+          <Navbar.Link active={path == "/"} as={"div"}>
+            <Link to={"sign-in"}>Sign in</Link>
+          </Navbar.Link>
+          <Navbar.Link active={path == "/"} as={"div"}>
+            <Link to={"sign-up"}>Sign up</Link>
+          </Navbar.Link>
+          <Navbar.Link active={path == "/"} as={"div"}>
+            <Link to={"dashboard"}>Dashboard</Link>
+          </Navbar.Link>
         </Navbar.Collapse>
       </Navbar>
+      <Outlet />
     </div>
   );
 }
