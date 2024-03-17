@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
+const cors = require("cors");
 const UserRouter = require("./Routes/User.Router.js");
 const AuthRouter = require("./Routes/Auth.Router.js");
 const Error = require("./Middlewares/Error.Middleware.js");
@@ -10,6 +11,7 @@ const app = express();
 //Application Level Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 // Route Level Middleware
 app.use("/api/v1/auth", AuthRouter);
@@ -17,8 +19,12 @@ app.use("/api/v1/users", UserRouter);
 
 //Error Handling Middleware
 app.use(Error.pageNotFound, async (err, req, res, next) => {
-  res.status(err.status || 500).json({
-    Error: `Error status code (${err.status || 500}),  ${err.message}`,
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+  res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
   });
 });
 
