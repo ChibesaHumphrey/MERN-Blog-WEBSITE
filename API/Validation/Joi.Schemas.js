@@ -8,7 +8,7 @@ exports.signup = joi.object({
 });
 
 exports.signin = joi.object({
-  username: joi.string().min(3).max(18).required(),
-  email: joi.string().email().required(),
-  password: joi.string().min(3).max(10).required(),
+  username: joi.string().min(3).max(18).required("Required"),
+  email: joi.string().email().required("Required"),
+  password: joi.string().min(3).max(10).required("Required"),
 });
