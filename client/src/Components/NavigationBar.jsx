@@ -5,6 +5,7 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 // import { HiMoon, HiSearch } from "react-icons/hi";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon } from "react-icons/fa";
+import FooterComponent from "./FooterComponent";
 
 export default function NavigationBar() {
   const path = useLocation().pathname;
@@ -69,6 +70,7 @@ export default function NavigationBar() {
         </Navbar.Collapse>
       </Navbar>
       <Outlet />
+      <FooterComponent />
     </div>
   );
 }

@@ -12,6 +12,7 @@ import Projects from "./Pages/Projects";
 import Dashboard from "./Pages/Dashboard";
 import SignUp from "./Pages/SignUp";
 import Signin from "./Pages/Signin";
+import FooterComponent from "./Components/FooterComponent";
 
 function App() {
   const router = createBrowserRouter(
