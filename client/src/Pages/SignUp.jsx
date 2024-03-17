@@ -50,13 +50,6 @@ export default function SignUp() {
             <span className=" capitalize text-2xl font-semibold">Focus</span> is
             a powerful mental tool that enables us to channel our attention and
             energy toward specific tasks or goals.
-            {/* It acts as a
-            magnifying glass, sharpening our abilities and enhancing
-            productivity. When we concentrate on a single objective, we become
-            more efficient, creative, and resilient. By eliminating distractions
-            and maintaining a clear vision, focus allows us to achieve
-            meaningful results and navigate life's challenges with purpose and
-            determination. */}
           </p>
         </div>
 
