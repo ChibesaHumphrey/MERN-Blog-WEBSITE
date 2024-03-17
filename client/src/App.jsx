@@ -29,7 +29,7 @@ function App() {
     )
   );
   return (
-    <div className=" container mx-auto">
+    <div>
       <RouterProvider router={router}></RouterProvider>
     </div>
   );
