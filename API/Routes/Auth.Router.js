@@ -5,5 +5,6 @@ const Validate = require("../Validation/Validator.js");
 
 router.post("/sign-up", Validate.signup, AuthController.signUp);
 router.post("/sign-in", Validate.signin, AuthController.signIn);
+router.post("/google", AuthController.googleAuth);
 
 module.exports = router;

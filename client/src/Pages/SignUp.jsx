@@ -1,6 +1,7 @@
 import { Alert, Button, Spinner } from "flowbite-react";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import OAuth from "../Components/OAuth";
 
 export default function SignUp() {
   const [FormData, setFormData] = useState({});
@@ -132,22 +133,25 @@ export default function SignUp() {
                       </label>
                     </div>
 
-                    <Button
-                      type="submit"
-                      gradientDuoTone="purpleToPink"
-                      disabled={isLoading}
-                      // className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                    >
-                      {isLoading ? (
-                        <>
-                          <Spinner size={"sm"}>
-                            <span className="">Submitting...</span>
-                          </Spinner>
-                        </>
-                      ) : (
-                        "Sign Up"
-                      )}
-                    </Button>
+                    <div className=" flex gap-5">
+                      <Button
+                        type="submit"
+                        gradientDuoTone="purpleToPink"
+                        disabled={isLoading}
+                        // className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                      >
+                        {isLoading ? (
+                          <>
+                            <Spinner size={"sm"}>
+                              <span className="">Submitting...</span>
+                            </Spinner>
+                          </>
+                        ) : (
+                          "Sign Up"
+                        )}
+                      </Button>
+                      <OAuth />
+                    </div>
                     <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                       Already have an account?{" "}
                       <Link

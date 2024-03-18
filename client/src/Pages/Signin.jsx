@@ -1,12 +1,14 @@
 import { Alert, Button, Spinner } from "flowbite-react";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import {
   signInStart,
   signInSuccess,
   signInFailure,
 } from "../Redux/User/UserSlice";
 import { useDispatch, useSelector } from "react-redux";
+import OAuth from "../Components/OAuth";
 export default function Signin() {
   const dispatch = useDispatch();
   const { loading, error: errorMessage } = useSelector((state) => state.user);
@@ -141,23 +143,27 @@ export default function Signin() {
                         password
                       </label>
                     </div>
+                    <div className=" flex gap-5">
+                      <Button
+                        type="submit"
+                        gradientDuoTone="purpleToPink"
+                        disabled={loading}
+                        // className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                      >
+                        {loading ? (
+                          <>
+                            <Spinner size={"sm"}>
+                              <span className="">Submitting...</span>
+                            </Spinner>
+                          </>
+                        ) : (
+                          "Sign In"
+                        )}
+                      </Button>
+                    
+                      <OAuth />
+                    </div>
 
-                    <Button
-                      type="submit"
-                      gradientDuoTone="purpleToPink"
-                      disabled={loading}
-                      // className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                    >
-                      {loading ? (
-                        <>
-                          <Spinner size={"sm"}>
-                            <span className="">Submitting...</span>
-                          </Spinner>
-                        </>
-                      ) : (
-                        "Sign In"
-                      )}
-                    </Button>
                     <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                       Don't have an account?{" "}
                       <Link
