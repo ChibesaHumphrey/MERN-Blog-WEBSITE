@@ -1,12 +1,19 @@
 import { Alert, Button, Spinner } from "flowbite-react";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../Redux/User/UserSlice";
+import { useDispatch, useSelector } from "react-redux";
 export default function Signin() {
+  const dispatch = useDispatch();
+  const { loading, error: errorMessage } = useSelector((state) => state.user);
   const [FormData, setFormData] = useState({});
+  // const [errorMessage, setErrorMessage] = useState(null);
+  // const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const API_URL = "http://localhost:5050/api/v1/auth/sign-in";
 
   const handleChange = (e) => {
@@ -14,13 +21,14 @@ export default function Signin() {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!FormData.username || !FormData.email || !FormData.password) {
-      return setErrorMessage("All Fields Required ...");
-    }
+    if (!FormData.username || !FormData.email || !FormData.password)
+      return dispatch(signInFailure("All Fields Required..."));
+    // return setErrorMessage("All Fields Required ...");
 
     try {
-      setIsLoading(true);
-      setErrorMessage(null);
+      // setIsLoading(true);
+      // setErrorMessage(null);
+      dispatch(signInStart);
       const res = await fetch(API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -28,22 +36,24 @@ export default function Signin() {
       });
 
       const data = await res.json();
-      if (data.success === false) {
-        return setErrorMessage(data.message);
-      }
-      setIsLoading(false);
+      if (data.success === false) return dispatch(signInFailure(data.message));
+      // return setErrorMessage(data.message);
+
+      // setIsLoading(false);
       if (res.ok) {
+        dispatch(signInSuccess(data));
         navigate("/");
       }
     } catch (error) {
-      setErrorMessage(error.message);
-      setIsLoading(false);
+      // setErrorMessage(error.message);
+      // setIsLoading(false);
+      dispatch(signInFailure(error.message));
     }
   };
   // console.log(FormData);
   return (
     <div className=" min-h-screen mt-20">
-      <div className=" flex flex-col gap-5 max-w-3xl p-4 mx-auto  md:items-center md:flex-row">
+      <div className=" flex flex-col gap-10 max-w-3xl p-4 mx-auto  md:items-center md:flex-row">
         {/* Left-side Content */}
         <div className=" flex-1">
           <p className=" text-sm text-justify flex-1">
@@ -135,10 +145,10 @@ export default function Signin() {
                     <Button
                       type="submit"
                       gradientDuoTone="purpleToPink"
-                      disabled={isLoading}
+                      disabled={loading}
                       // className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                     >
-                      {isLoading ? (
+                      {loading ? (
                         <>
                           <Spinner size={"sm"}>
                             <span className="">Submitting...</span>
