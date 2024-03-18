@@ -12,7 +12,7 @@ import Projects from "./Pages/Projects";
 import Dashboard from "./Pages/Dashboard";
 import SignUp from "./Pages/SignUp";
 import Signin from "./Pages/Signin";
-import FooterComponent from "./Components/FooterComponent";
+import PrivateRoute from "./Components/PrivateRoute";
 
 function App() {
   const router = createBrowserRouter(
@@ -22,9 +22,11 @@ function App() {
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="projects" element={<Projects />} />
-          <Route path="dashboard" element={<Dashboard />} />
           <Route path="sign-up" element={<SignUp />} />
           <Route path="sign-in" element={<Signin />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="dashboard" element={<Dashboard />} />
+          </Route>
         </Route>
       </>
     )
