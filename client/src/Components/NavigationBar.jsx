@@ -1,15 +1,18 @@
 "use client";
-
-import { Button, Navbar, TextInput } from "flowbite-react";
+import { Avatar, Button, Dropdown, Navbar, TextInput } from "flowbite-react";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
-// import { HiMoon, HiSearch } from "react-icons/hi";
 import { AiOutlineSearch } from "react-icons/ai";
-import { FaMoon } from "react-icons/fa";
+import { FaMoon, FaSun } from "react-icons/fa";
 import FooterComponent from "./FooterComponent";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleTheme } from "../Redux/theme/themeSlice";
 
 export default function NavigationBar() {
   const path = useLocation().pathname;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector((state) => state.user);
+  const { theme } = useSelector((state) => state.theme);
   return (
     <div className="">
       <Navbar fluid rounded className="pt-4 border-b-2">
@@ -35,17 +38,51 @@ export default function NavigationBar() {
           <AiOutlineSearch />
         </Button>
         <div className="flex gap-2 md:order-2">
-          <Button className="w-12 h-10 hidden sm:inline" color="gray" pill>
-            <FaMoon />
-          </Button>
           <Button
+            className="w-12 h-10 hidden sm:inline"
+            color="gray"
+            pill
+            onClick={() => dispatch(toggleTheme())}
+          >
+            {theme === "light" ? <FaSun /> : <FaMoon />}
+          </Button>
+          {currentUser ? (
+            <Dropdown
+              arrowIcon={false}
+              inline
+              label={
+                <Avatar alt="user" img={currentUser.profilePicture} rounde d />
+              }
+            >
+              <Dropdown.Header>
+                <span className="block text-sm">@{currentUser.username}</span>
+                <span className="block text-sm font-medium truncate">
+                  {currentUser.email}
+                </span>
+              </Dropdown.Header>
+              <Link to={"/dashboard?tab=profile"}>
+                <Dropdown.Item>Profile</Dropdown.Item>
+              </Link>
+              <Dropdown.Divider />
+              <Dropdown.Item>Sign out</Dropdown.Item>
+            </Dropdown>
+          ) : (
+            <Button
+              gradientDuoTone="purpleToBlue"
+              outline
+              onClick={() => navigate("sign-in")}
+            >
+              Sign In
+            </Button>
+          )}
+          {/* <Button
             gradientDuoTone="purpleToPink"
             onClick={() => navigate("sign-in")}
             pill
             size={"xs"}
           >
             Sign In
-          </Button>
+          </Button> */}
         </div>
         <Navbar.Toggle />
         <Navbar.Collapse>
