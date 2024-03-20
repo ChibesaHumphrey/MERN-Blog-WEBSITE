@@ -6,7 +6,7 @@ import {
   signInStart,
   signInSuccess,
   signInFailure,
-} from "../Redux/User/UserSlice";
+} from "../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import OAuth from "../Components/OAuth";
 export default function Signin() {
@@ -160,7 +160,7 @@ export default function Signin() {
                           "Sign In"
                         )}
                       </Button>
-                    
+
                       <OAuth />
                     </div>
 

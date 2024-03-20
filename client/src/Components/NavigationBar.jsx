@@ -5,7 +5,10 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon, FaSun } from "react-icons/fa";
 import FooterComponent from "./FooterComponent";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleTheme } from "../Redux/theme/themeSlice";
+// import { toggleTheme } from "../Redux/theme/themeSlice";
+// import { signoutSuccess } from "./src/Redux/User/UserSlice.js";
+import { toggleTheme } from "../redux/theme/themeSlice";
+import { signoutSuccess } from "../redux/user/userSlice";
 
 export default function NavigationBar() {
   const path = useLocation().pathname;
@@ -13,6 +16,22 @@ export default function NavigationBar() {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
   const { theme } = useSelector((state) => state.theme);
+
+  const handleSignout = async () => {
+    try {
+      const res = await fetch("/api/v1/users/sign-out", {
+        method: "POST",
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        dispatch(signoutSuccess());
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <div className="">
       <Navbar fluid rounded className="pt-4 border-b-2">
@@ -64,7 +83,9 @@ export default function NavigationBar() {
                 <Dropdown.Item>Profile</Dropdown.Item>
               </Link>
               <Dropdown.Divider />
-              <Dropdown.Item>Sign out</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleSignout()}>
+                Sign out
+              </Dropdown.Item>
             </Dropdown>
           ) : (
             <Button

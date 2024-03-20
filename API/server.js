@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
 const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const UserRouter = require("./Routes/User.Router.js");
 const AuthRouter = require("./Routes/Auth.Router.js");
@@ -10,6 +11,7 @@ const app = express();
 
 //Application Level Middleware
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
