@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const UserRouter = require("./Routes/User.Router.js");
 const AuthRouter = require("./Routes/Auth.Router.js");
+const PostRouter = require("./Routes/Post.Router.js");
 const Error = require("./Middlewares/Error.Middleware.js");
 const PORT = process.env.PORT || 5000;
 const app = express();
@@ -18,6 +19,7 @@ app.use(cors());
 // Route Level Middleware
 app.use("/api/v1/auth", AuthRouter);
 app.use("/api/v1/users", UserRouter);
+app.use("/api/v1/posts", PostRouter);
 
 //Error Handling Middleware
 app.use(Error.pageNotFound, async (err, req, res, next) => {
