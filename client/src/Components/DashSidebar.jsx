@@ -2,9 +2,9 @@ import { Sidebar } from "flowbite-react";
 import {
   HiUser,
   HiArrowSmRight,
-  // HiDocumentText,
-  // HiOutlineUserGroup,
-  // HiAnnotation,
+  HiDocumentText,
+  HiOutlineUserGroup,
+  HiAnnotation,
   HiChartPie,
 } from "react-icons/hi";
 import { useEffect, useState } from "react";
@@ -67,7 +67,7 @@ export default function DashSidebar() {
               Profile
             </Sidebar.Item>
           </Link>
-          {/* {currentUser.isAdmin && (
+          {currentUser.isAdmin && (
             <Link to="/dashboard?tab=posts">
               <Sidebar.Item
                 active={tab === "posts"}
@@ -77,8 +77,8 @@ export default function DashSidebar() {
                 Posts
               </Sidebar.Item>
             </Link>
-          )} */}
-          {/* {currentUser.isAdmin && (
+          )}
+          {currentUser.isAdmin && (
             <>
               <Link to="/dashboard?tab=users">
                 <Sidebar.Item
@@ -99,7 +99,7 @@ export default function DashSidebar() {
                 </Sidebar.Item>
               </Link>
             </>
-          )} */}
+          )}
           <Sidebar.Item
             icon={HiArrowSmRight}
             className="cursor-pointer"

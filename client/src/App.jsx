@@ -15,6 +15,7 @@ import Signin from "./Pages/Signin";
 import PrivateRoute from "./Components/PrivateRoute";
 import OnlyAdminRoute from "./Components/OnlyAdminRoute";
 import CreatePost from "./Pages/CreatePost";
+import PostPage from "./Pages/PostPage";
 
 function App() {
   const router = createBrowserRouter(
@@ -26,6 +27,7 @@ function App() {
           <Route path="projects" element={<Projects />} />
           <Route path="sign-up" element={<SignUp />} />
           <Route path="sign-in" element={<Signin />} />
+          <Route path="/post/:postSlug" element={<PostPage />} />
           <Route element={<OnlyAdminRoute />}>
             <Route path="create-post" element={<CreatePost />} />
           </Route>
