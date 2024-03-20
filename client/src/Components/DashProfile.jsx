@@ -21,11 +21,12 @@ import {
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function DashProfile() {
   const filePickerRef = useRef();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { currentUser, error, loading } = useSelector((state) => state.user);
   const [imageFileUploadProgress, setImageFileUploadProgress] = useState(null);
   const [imageFileUploadError, setImageFileUploadError] = useState(null);
@@ -243,15 +244,14 @@ export default function DashProfile() {
           {loading ? "Loading..." : "Update"}
         </Button>
         {currentUser.isAdmin && (
-          <Link to={"/create-post"}>
-            <Button
-              type="button"
-              gradientDuoTone="purpleToPink"
-              className="w-full"
-            >
-              Create a post
-            </Button>
-          </Link>
+          <Button
+            type="button"
+            gradientDuoTone="purpleToPink"
+            className="w-full"
+            onClick={() => navigate("/create-post")}
+          >
+            Create a post
+          </Button>
         )}
       </form>
       <div className="text-red-500 flex justify-between mt-5">

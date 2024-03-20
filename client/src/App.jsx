@@ -13,6 +13,8 @@ import Dashboard from "./Pages/Dashboard";
 import SignUp from "./Pages/SignUp";
 import Signin from "./Pages/Signin";
 import PrivateRoute from "./Components/PrivateRoute";
+import OnlyAdminRoute from "./Components/OnlyAdminRoute";
+import CreatePost from "./Pages/CreatePost";
 
 function App() {
   const router = createBrowserRouter(
@@ -24,6 +26,9 @@ function App() {
           <Route path="projects" element={<Projects />} />
           <Route path="sign-up" element={<SignUp />} />
           <Route path="sign-in" element={<Signin />} />
+          <Route element={<OnlyAdminRoute />}>
+            <Route path="create-post" element={<CreatePost />} />
+          </Route>
           <Route element={<PrivateRoute />}>
             <Route path="dashboard" element={<Dashboard />} />
           </Route>

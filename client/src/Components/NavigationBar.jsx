@@ -70,7 +70,7 @@ export default function NavigationBar() {
               arrowIcon={false}
               inline
               label={
-                <Avatar alt="user" img={currentUser.profilePicture} rounde d />
+                <Avatar alt="user" img={currentUser.profilePicture} rounded />
               }
             >
               <Dropdown.Header>
